@@ -35,7 +35,6 @@ const plugins = PRODUCTION ?
   new SriPlugin({
     hashFuncNames: ['sha256', 'sha384'],
     enabled: PRODUCTION,
-    crossorigin: 'anonymous',
   }),
 ]
   :
@@ -74,6 +73,7 @@ module.exports = {
     }],
   },
   output: {
+    crossOriginLoading: 'anonymous',
     path: path.join(__dirname, 'dist'),
     publicPath: PRODUCTION ? '/' : '/dist/',
     filename: PRODUCTION ? '[name].[hash:12].min.js' : '[name].js',
