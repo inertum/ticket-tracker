@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import customer from './customer';
 
 const project = {

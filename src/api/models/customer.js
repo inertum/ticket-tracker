@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import contact from './contact';
 
 const customer = {

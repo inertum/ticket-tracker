@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import ticket from './ticket';
 
 const date = {

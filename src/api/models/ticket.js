@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import date from './date';
 import customer from './customer';
 import project from './project';

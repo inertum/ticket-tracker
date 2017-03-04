@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const contact = {
   id: '',
   firstname: '',
