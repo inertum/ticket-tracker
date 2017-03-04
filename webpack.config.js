@@ -4,7 +4,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const SriPlugin = require('webpack-subresource-integrity');
 
-const DEVELOPMENT = process.env.NODE_ENV === 'development';
 const PRODUCTION = process.env.NODE_ENV === 'production';
 
 const entry = PRODUCTION
@@ -29,7 +28,7 @@ const plugins = PRODUCTION ?
       warnings: false,
     },
   }),
-  new ExtractTextPlugin('styles-[contenthash:10].css'),
+  new ExtractTextPlugin('styles/styles-[contenthash:10].css'),
   new HTMLWebpackPlugin({
     template: 'index-template.html',
   }),

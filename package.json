@@ -1,8 +1,8 @@
 {
-  "name": "tickettracker",
-  "version": "0.0.1",
+  "name": "ticket-tracker",
+  "version": "0.0.2",
   "description": "Time management and work ticket tracking system",
-  "main": "index.jsx",
+  "main": "index.js",
   "author": "Ollipekka Jalonen <ollipekka.jalonen@gmail.com>",
   "license": "MIT",
   "scripts": {
