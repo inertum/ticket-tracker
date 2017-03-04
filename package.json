@@ -1,0 +1,48 @@
+{
+  "name": "tickettracker",
+  "version": "0.0.1",
+  "description": "Time management and work ticket tracking system",
+  "main": "index.jsx",
+  "author": "Ollipekka Jalonen <ollipekka.jalonen@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf dist && NODE_ENV=production webpack -p --progress",
+    "start": "NODE_ENV=development node webpack.dev-server.js"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.5.3",
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "css-loader": "^0.26.0",
+    "eslint": "^3.17.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.0",
+    "extract-text-webpack-plugin": "2.0.0-beta.4",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.24.1",
+    "jquery": "^3.1.1",
+    "node-sass": "^4.5.0",
+    "postcss": "^5.2.6",
+    "postcss-cssnext": "^2.9.0",
+    "postcss-loader": "^1.1.1",
+    "postcss-partial-import": "^2.1.0",
+    "rimraf": "^2.5.4",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "2.2.0",
+    "webpack-dev-server": "2.2.0",
+    "webpack-subresource-integrity": "^0.7.0"
+  },
+  "dependencies": {
+    "mobx": "^3.1.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  }
+}
