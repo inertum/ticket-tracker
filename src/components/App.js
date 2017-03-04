@@ -2,6 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Provider, observer } from 'mobx-react';
 
+import Appbar from 'muicss/lib/react/appbar';
+import Button from 'muicss/lib/react/button';
+import Container from 'muicss/lib/react/container';
+
 @observer
 export default class App extends Component {
   static propTypes = {
@@ -27,7 +31,10 @@ export default class App extends Component {
       <Router>
         <Provider store={this.props.store}>
           <div className="wrapper">
-            <h1>Hello World</h1>
+            <Appbar></Appbar>
+            <Container>
+              <Button color="primary">button</Button>
+            </Container>
           </div>
         </Provider>
       </Router>
