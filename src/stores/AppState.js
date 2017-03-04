@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx'
+import { observable, action } from 'mobx';
 
 class AppState {
   @observable authenticated
@@ -11,6 +11,7 @@ class AppState {
 
   @action authenticate() {
     return new Promise((resolve, reject) => {
+      console.log(reject);
       this.authenticating = true;
       setTimeout(() => {
         this.authenticated = !this.authenticated;
