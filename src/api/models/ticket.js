@@ -1,10 +1,11 @@
+import date from './date';
 import customer from './customer';
 import project from './project';
 import expense from './expense';
 
 const ticket = {
   id: '',
-  date: '',
+  date,
   start_time: '',
   end_time: '',
   duration: '',

@@ -1,5 +1,4 @@
 import contact from './contact';
-import project from './project';
 
 const customer = {
   id: '',
@@ -8,9 +7,7 @@ const customer = {
   postal_code: '',
   city: '',
   contact,
-  projects: [{
-    project,
-  }],
+  projects: [],
 };
 
 export default customer;

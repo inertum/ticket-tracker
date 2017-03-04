@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import App from './components/App';
+import AppState from './stores/AppState';
+
 require('./styles/main.scss');
 
-const App = () => <h1>Hello world</h1>;
+const appState = new AppState();
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(
+  <App store={appState} />,
+  document.getElementById('app'),
+);
 
 if (module.hot) {
   module.hot.accept();
