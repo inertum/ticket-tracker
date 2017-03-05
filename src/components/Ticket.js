@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppBar, Autocomplete, IconButton, DatePicker, Input, TimePicker } from 'react-toolbox';
+import { AppBar, Autocomplete, DatePicker, TimePicker, RadioGroup, RadioButton } from 'react-toolbox';
 
 import { observer } from 'mobx-react';
 
@@ -27,6 +27,7 @@ class Ticket extends Component {
       date: datetime,
       startTime: time,
       endTime: time,
+      type: '',
     };
   }
 
@@ -38,32 +39,71 @@ class Ticket extends Component {
     this.setState({ customer: value });
   };
 
+  handleTypeChange = (value) => {
+    this.setState({ type: value });
+  };
+
   render() {
     return (
       <section>
         <AppBar title="ADD A NEW TICKET" />
         <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
-          <p>Enter information below</p>
-          <Autocomplete
-            title="Customer"
-            name="Customer"
-            hint="Choose customer"
-            direction="down"
-            selectedPosition="above"
-            label="Choose customer"
-            multiple={false}
-            onChange={this.handleCustomerChange}
-            source={customerSource}
-            value={this.state.customer}
-          />
-          <div style={{ display: 'inline-block', overflowY: 'auto', width: '33%' }}>
-            <DatePicker icon="view_day" hint="Choose a date" label="Date" name="Date" value={this.state.date} onChange={this.handleChange.bind(this, 'date')} />
+          <div style={{ display: 'inline-block', overflowY: 'auto', width: '25%' }}>
+            <RadioGroup style={{ display: 'inline-block' }} name="type" value={this.state.type} onChange={this.handleTypeChange}>
+              <RadioButton style={{ display: 'inline-block', padding: '0.5em' }} label="Project" value="project" />
+              <RadioButton style={{ display: 'inline-block', padding: '0.5em' }} label="Support" value="support" />
+              <RadioButton style={{ display: 'inline-block', padding: '0.5em' }} label="Task" value="task" />
+            </RadioGroup>
           </div>
-          <div style={{ display: 'inline-block', overflowY: 'auto', width: '33%' }}>
-            <TimePicker icon="schedule" hint="Choose start time" label="Start Time" name="startTime" value={this.state.startTime} onChange={this.handleChange.bind(this, 'startTime')} size="6" />
-          </div>
-          <div style={{ display: 'inline-block', overflowY: 'auto', width: '33%' }}>
-            <TimePicker icon="schedule" hint="Choose end time" label="End Time" name="endTime" value={this.state.endTime} onChange={this.handleChange.bind(this, 'endTime')} />
+          <div style={{ display: 'inline-block', overflowY: 'auto', width: '75%' }}>
+            <div style={{ display: 'inline-block', overflowY: 'auto', width: '33%' }}>
+              <DatePicker icon="view_day" hint="Choose a date" label="Date" name="Date" value={this.state.date} onChange={this.handleChange.bind(this, 'date')} />
+            </div>
+            <div style={{ display: 'inline-block', overflowY: 'auto', width: '33%' }}>
+              <TimePicker icon="schedule" hint="Choose start time" label="Start Time" name="startTime" value={this.state.startTime} onChange={this.handleChange.bind(this, 'startTime')} size="6" />
+            </div>
+            <div style={{ display: 'inline-block', overflowY: 'auto', width: '33%' }}>
+              <TimePicker icon="schedule" hint="Choose end time" label="End Time" name="endTime" value={this.state.endTime} onChange={this.handleChange.bind(this, 'endTime')} />
+            </div>
+            <Autocomplete
+              icon="account_box"
+              title="Customer"
+              name="Customer"
+              hint="Choose customer"
+              direction="down"
+              selectedPosition="above"
+              label="Choose customer"
+              multiple={false}
+              onChange={this.handleCustomerChange}
+              source={customerSource}
+              value={this.state.customer}
+            />
+            <div style={{ display: 'inline-block', overflowY: 'auto', width: '50%' }}>
+              <Autocomplete
+                icon="work"
+                title="Project"
+                name="Project"
+                hint="Choose project"
+                direction="down"
+                selectedPosition="above"
+                label="Choose project"
+                multiple={false}
+                source={customerSource}
+              />
+            </div>
+            <div style={{ display: 'inline-block', overflowY: 'auto', width: '50%' }}>
+              <Autocomplete
+                icon="search"
+                title="Reference"
+                name="Reference"
+                hint="Choose reference"
+                direction="down"
+                selectedPosition="above"
+                label="Choose reference"
+                multiple={false}
+                source={customerSource}
+              />
+            </div>
           </div>
         </div>
       </section>
