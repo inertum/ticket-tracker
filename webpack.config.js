@@ -57,6 +57,7 @@ const cssLoader = PRODUCTION ?
         sourceMap: true,
         importLoaders: 1,
         localIdentName: cssIdentifier,
+        cacheDirectory: true,
       },
     },
       'postcss-loader', // has separate config nearby
@@ -67,6 +68,7 @@ const cssLoader = PRODUCTION ?
 {
   test: /\.(css)$/,
   use: [
+    'style-loader',
     {
       loader: 'css-loader',
       options: {
@@ -74,6 +76,7 @@ const cssLoader = PRODUCTION ?
         sourceMap: true,
         importLoaders: 1,
         localIdentName: cssIdentifier,
+        cacheDirectory: true,
       },
     },
     'postcss-loader',
@@ -90,7 +93,7 @@ module.exports = {
   module: {
     rules: [{
       test: /\.(js|jsx)$/,
-      loaders: ['babel-loader'],
+      use: ['babel-loader'],
       exclude: '/node_modules/',
     }, {
       test: /\.(png|jpg|gif)$/,

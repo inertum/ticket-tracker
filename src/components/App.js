@@ -60,8 +60,8 @@ export default class App extends Component {
             <Panel>
               <AppBar leftIcon="menu" onLeftIconClick={this.toggleDrawerActive} />
               <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
-                <h1>Main Content</h1>
-                <p>Main content goes here.</p>
+                <h1>What is going on?</h1>
+                <p>This is so fucking cool!</p>
                 <Checkbox label="Pin drawer" checked={this.state.drawerPinned} onChange={this.toggleDrawerPinned} />
                 <Checkbox label="Show sidebar" checked={this.state.sidebarPinned} onChange={this.toggleSidebar} />
               </div>
