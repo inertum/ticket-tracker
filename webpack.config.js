@@ -60,7 +60,8 @@ ExtractTextPlugin.extract({
   :
 [
   'style-loader',
-  `css-loader?importLoaders=1&localIdentName=${cssIdentifier}!postcss-loader`,
+  `css-loader?importLoaders=1&localIdentName=${cssIdentifier}`,
+  'postcss-loader',
 ];
 
 
