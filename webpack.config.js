@@ -45,7 +45,6 @@ const cssIdentifier = PRODUCTION ? '[hash:base64:10]' : '[path][name]---[local]'
 const cssLoader = PRODUCTION ?
 ExtractTextPlugin.extract({
   use: [
-    'style-loader',
     {
       loader: 'css-loader',
       options: {
@@ -55,20 +54,20 @@ ExtractTextPlugin.extract({
         localIdentName: cssIdentifier,
       },
     },
-    'postcss-loader',
+    'postcss-loader', // has separate config nearby
   ],
 })
   :
 [
   'style-loader',
-  `css-loader?importLoaders=1&localIdentName=${cssIdentifier}!sass-loader`,
+  `css-loader?importLoaders=1&localIdentName=${cssIdentifier}!postcss-loader`,
 ];
 
 
 module.exports = {
   entry: {
     app: entry,
-    vendor: ['react', 'react-dom', 'mobx'],
+    vendor: ['react', 'react-dom', 'mobx', 'mobx-react', 'react-router-dom', 'react-toolbox'],
   },
   plugins,
   module: {
@@ -82,19 +81,7 @@ module.exports = {
       exclude: '/node_modules/',
     }, {
       test: /\.(css)$/,
-      use: [
-        'style-loader',
-        {
-          loader: 'css-loader',
-          options: {
-            modules: true,
-            sourceMap: true,
-            importLoaders: 1,
-            localIdentName: cssIdentifier,
-          },
-        },
-        'postcss-loader',
-      ],
+      loaders: cssLoader,
     }],
   },
   output: {
