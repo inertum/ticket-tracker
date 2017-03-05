@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider, observer } from 'mobx-react';
 
-import { Layout, NavDrawer, Panel, Sidebar, AppBar, IconButton } from 'react-toolbox';
+import { Card, Layout, NavDrawer, Panel, Sidebar, AppBar, IconButton } from 'react-toolbox';
 
 import Ticket from './Ticket';
 
@@ -48,27 +48,29 @@ export default class App extends Component {
     return (
       <Router>
         <Provider store={this.props.store}>
-          <Layout>
-            <NavDrawer
-              active={this.state.drawerActive}
-              pinned={this.state.drawerPinned} permanentAt="xxxl"
-              onOverlayClick={this.toggleDrawerActive}
-            >
-              <p>
-                    Navigation, account switcher, etc. go here.
-                </p>
-            </NavDrawer>
-            <Panel>
-              <AppBar leftIcon="menu" onLeftIconClick={this.toggleDrawerActive} />
-              <Ticket />
-            </Panel>
-            <Sidebar pinned={this.state.sidebarPinned} width={5}>
-              <div><IconButton icon="close" onClick={this.toggleSidebar} /></div>
-              <div style={{ flex: 1 }}>
-                <p>Supplemental content goes here.</p>
-              </div>
-            </Sidebar>
-          </Layout>
+          <div style={{ width: '1180px', margin: '10px auto 0' }}>
+            <Layout>
+              <NavDrawer
+                active={this.state.drawerActive}
+                pinned={this.state.drawerPinned} permanentAt="xxxl"
+                onOverlayClick={this.toggleDrawerActive}
+              >
+                <p>
+                      Navigation, account switcher, etc. go here.
+                  </p>
+              </NavDrawer>
+              <Card style={{maxWidth: '980px'}}>
+                <AppBar leftIcon="menu" onLeftIconClick={this.toggleDrawerActive} />
+                <Ticket />
+              </Card>
+              <Sidebar pinned={this.state.sidebarPinned} width={5}>
+                <div><IconButton icon="close" onClick={this.toggleSidebar} /></div>
+                <div style={{ flex: 1 }}>
+                  <p>Supplemental content goes here.</p>
+                </div>
+              </Sidebar>
+            </Layout>
+          </div>
         </Provider>
       </Router>
     );
