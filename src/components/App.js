@@ -2,8 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider, observer } from 'mobx-react';
 
-import { AppBar, Checkbox, IconButton } from 'react-toolbox';
-import { Layout, NavDrawer, Panel, Sidebar } from 'react-toolbox';
+import { Layout, NavDrawer, Panel, Sidebar, AppBar, IconButton } from 'react-toolbox';
+
+import Ticket from './Ticket';
 
 @observer
 export default class App extends Component {
@@ -26,6 +27,11 @@ export default class App extends Component {
     this.authenticate();
   }
 
+  authenticate = (e) => {
+    if (e) e.preventDefault();
+    this.props.store.authenticate();
+  }
+
   toggleDrawerActive = () => {
     this.setState({ drawerActive: !this.state.drawerActive });
   };
@@ -37,11 +43,6 @@ export default class App extends Component {
   toggleSidebar = () => {
     this.setState({ sidebarPinned: !this.state.sidebarPinned });
   };
-
-  authenticate = (e) => {
-    if (e) e.preventDefault();
-    this.props.store.authenticate();
-  }
 
   render() {
     return (
@@ -59,12 +60,7 @@ export default class App extends Component {
             </NavDrawer>
             <Panel>
               <AppBar leftIcon="menu" onLeftIconClick={this.toggleDrawerActive} />
-              <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
-                <h1>What is going on?</h1>
-                <p>This is so fucking cool!</p>
-                <Checkbox label="Pin drawer" checked={this.state.drawerPinned} onChange={this.toggleDrawerPinned} />
-                <Checkbox label="Show sidebar" checked={this.state.sidebarPinned} onChange={this.toggleSidebar} />
-              </div>
+              <Ticket />
             </Panel>
             <Sidebar pinned={this.state.sidebarPinned} width={5}>
               <div><IconButton icon="close" onClick={this.toggleSidebar} /></div>
