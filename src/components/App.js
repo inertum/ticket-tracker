@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider, observer } from 'mobx-react';
 
-import { Card, Layout, Sidebar, IconButton } from 'react-toolbox';
+import { Card, Button, Layout, Sidebar, IconButton } from 'react-toolbox';
 
 import Ticket from './Ticket';
 
@@ -50,6 +50,7 @@ export default class App extends Component {
         <Provider store={this.props.store}>
           <div style={{ width: '1180px', margin: '10px auto 0' }}>
             <Layout>
+              <Button label="+ New ticket" flat primary />
               <Card style={{ maxWidth: '100%' }}>
                 <Ticket />
               </Card>
