@@ -44,12 +44,12 @@ const cssIdentifier = PRODUCTION ? '[hash:base64:10]' : '[path][name]---[local]'
 
 const cssLoader = PRODUCTION ?
 ExtractTextPlugin.extract({
-  use: `css-loader?importLoaders=1&localIdentName=${cssIdentifier}!postcss-loader!sass-loader`,
+  use: `css-loader?importLoaders=1&localIdentName=${cssIdentifier}!postcss-loader`,
 })
   :
 [
   'style-loader',
-  `css-loader?importLoaders=1&localIdentName=${cssIdentifier}!postcss-loader!sass-loader`,
+  `css-loader?importLoaders=1&localIdentName=${cssIdentifier}!postcss-loader`,
 ];
 
 module.exports = {
@@ -70,6 +70,7 @@ module.exports = {
     }, {
       test: /\.(scss|css)$/,
       loaders: cssLoader,
+      exclude: '/node_modules/',
     }],
   },
   output: {

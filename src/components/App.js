@@ -2,17 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider, observer } from 'mobx-react';
 
-import Option from 'muicss/lib/react/option';
-import Select from 'muicss/lib/react/select';
-import Form from 'muicss/lib/react/form';
-import Input from 'muicss/lib/react/input';
-import Textarea from 'muicss/lib/react/textarea';
-import Button from 'muicss/lib/react/button';
-import Radio from 'muicss/lib/react/radio';
-
-import Container from 'muicss/lib/react/container';
-import Row from 'muicss/lib/react/row';
-import Col from 'muicss/lib/react/col';
+import { AppBar, Checkbox, IconButton } from 'react-toolbox';
+import { Layout, NavDrawer, Panel, Sidebar } from 'react-toolbox';
 
 @observer
 export default class App extends Component {
@@ -25,9 +16,27 @@ export default class App extends Component {
     store: {},
   };
 
+  state = {
+    drawerActive: false,
+    drawerPinned: false,
+    sidebarPinned: false,
+  };
+
   componentDidMount() {
     this.authenticate();
   }
+
+  toggleDrawerActive = () => {
+    this.setState({ drawerActive: !this.state.drawerActive });
+  };
+
+  toggleDrawerPinned = () => {
+    this.setState({ drawerPinned: !this.state.drawerPinned });
+  }
+
+  toggleSidebar = () => {
+    this.setState({ sidebarPinned: !this.state.sidebarPinned });
+  };
 
   authenticate = (e) => {
     if (e) e.preventDefault();
@@ -38,53 +47,32 @@ export default class App extends Component {
     return (
       <Router>
         <Provider store={this.props.store}>
-          <Container>
-            <Form>
-              <Row>
-                <Col md="12">
-                  <Input label="Date" floatingLabel />
-                </Col>
-              </Row>
-              <Row>
-                <Col md="6">
-                  <Input label="Start time" floatingLabel />
-                </Col>
-                <Col md="6">
-                  <Input label="End time" floatingLabel />
-                </Col>
-              </Row>
-              <Row>
-                <Col md="12">
-                  <Input label="Client" floatingLabel />
-                </Col>
-              </Row>
-              <Row>
-                <Col md="6">
-                  <Select defaultValue="option-1" label="Projekti">
-                    <Option value="option-1" label="Optimize" />
-                    <Option value="option-2" label="Cache" />
-                    <Option value="option-3" label="Backup" />
-                    <Option value="option-4" label="+ Add new project" />
-                  </Select>
-                </Col>
-                <Col md="6">
-                  <Radio name="type" label="Task" />
-                  <Radio name="type" label="Support Request" />
-                  <Radio name="type" label="On-Call" />
-                </Col>
-              </Row>
-              <Row>
-                <Col md="12">
-                  <Textarea label="Description" floatingLabel />
-                </Col>
-              </Row>
-              <Row>
-                <Col md="12">
-                  <Button size="large" color="primary">button</Button>
-                </Col>
-              </Row>
-            </Form>
-          </Container>
+          <Layout>
+            <NavDrawer
+              active={this.state.drawerActive}
+              pinned={this.state.drawerPinned} permanentAt="xxxl"
+              onOverlayClick={this.toggleDrawerActive}
+            >
+              <p>
+                    Navigation, account switcher, etc. go here.
+                </p>
+            </NavDrawer>
+            <Panel>
+              <AppBar leftIcon="menu" onLeftIconClick={this.toggleDrawerActive} />
+              <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
+                <h1>Main Content</h1>
+                <p>Main content goes here.</p>
+                <Checkbox label="Pin drawer" checked={this.state.drawerPinned} onChange={this.toggleDrawerPinned} />
+                <Checkbox label="Show sidebar" checked={this.state.sidebarPinned} onChange={this.toggleSidebar} />
+              </div>
+            </Panel>
+            <Sidebar pinned={this.state.sidebarPinned} width={5}>
+              <div><IconButton icon="close" onClick={this.toggleSidebar} /></div>
+              <div style={{ flex: 1 }}>
+                <p>Supplemental content goes here.</p>
+              </div>
+            </Sidebar>
+          </Layout>
         </Provider>
       </Router>
     );
