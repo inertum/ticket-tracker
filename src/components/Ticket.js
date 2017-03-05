@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Checkbox, Input } from 'react-toolbox';
+import { Checkbox, DatePicker, Input, TimePicker } from 'react-toolbox';
 
 import { observer } from 'mobx-react';
 
@@ -8,7 +8,7 @@ class Ticket extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      customer: '',
     };
   }
 
@@ -19,9 +19,10 @@ class Ticket extends Component {
   render() {
     return (
       <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
-        <h1>What is going on?</h1>
-        <p>This is so fucking cool!</p>
-        <Input type="text" label="Name" name="name" value={this.state.name} onChange={this.handleChange.bind(this, 'name')} maxLength={16} />
+        <h1>Add a new ticket</h1>
+        <DatePicker />
+        <TimePicker />
+        <Input type="text" hint="Customer" label="Customer" name="Customer" value={this.state.customer} onChange={this.handleChange.bind(this, 'customer')} maxLength={16} />
         <Checkbox label="Pin drawer" />
         <Checkbox label="Show sidebar" />
       </div>
