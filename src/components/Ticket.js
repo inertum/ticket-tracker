@@ -18,6 +18,18 @@ const customerSource = {
   C4: 'Customer 4',
 };
 
+const projectSource = {
+  P1: 'Project 1',
+  P2: 'Project 2',
+  P3: 'Project 3',
+};
+
+const taskSource = {
+  T1: 'Task 1',
+  T2: 'Task 2',
+  T3: 'Task 3',
+};
+
 @observer
 class Ticket extends Component {
   constructor(props) {
@@ -88,10 +100,9 @@ class Ticket extends Component {
                 hint="Choose project"
                 direction="down"
                 selectedPosition="above"
-                disabled={this.state.type !== 'project'}
                 label="Choose project"
                 multiple={false}
-                source={customerSource}
+                source={projectSource}
               />
             </div>
             <div style={{ display: 'inline-block', overflowY: 'auto', width: '50%' }}>
@@ -101,11 +112,10 @@ class Ticket extends Component {
                 name="Reference"
                 hint="Choose reference"
                 direction="down"
-                disabled={this.state.type !== 'task'}
                 selectedPosition="above"
                 label="Choose reference"
                 multiple={false}
-                source={customerSource}
+                source={taskSource}
               />
             </div>
             <Input
