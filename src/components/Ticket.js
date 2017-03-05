@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppBar, Autocomplete, DatePicker, TimePicker, RadioGroup, RadioButton } from 'react-toolbox';
+import { AppBar, Autocomplete, DatePicker, Input, TimePicker, RadioGroup, RadioButton } from 'react-toolbox';
 
 import { observer } from 'mobx-react';
 
@@ -28,6 +28,7 @@ class Ticket extends Component {
       startTime: time,
       endTime: time,
       type: '',
+      description: '',
     };
   }
 
@@ -48,14 +49,15 @@ class Ticket extends Component {
       <section>
         <AppBar title="ADD A NEW TICKET" />
         <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
-          <div style={{ display: 'inline-block', overflowY: 'auto', width: '25%' }}>
+          <div style={{ display: 'inline-block', overflowY: 'auto', width: '20%', verticalAlign: 'top' }}>
+            <p>Choose type</p>
             <RadioGroup style={{ display: 'inline-block' }} name="type" value={this.state.type} onChange={this.handleTypeChange}>
               <RadioButton style={{ display: 'inline-block', padding: '0.5em' }} label="Project" value="project" />
               <RadioButton style={{ display: 'inline-block', padding: '0.5em' }} label="Support" value="support" />
               <RadioButton style={{ display: 'inline-block', padding: '0.5em' }} label="Task" value="task" />
             </RadioGroup>
           </div>
-          <div style={{ display: 'inline-block', overflowY: 'auto', width: '75%' }}>
+          <div style={{ display: 'inline-block', overflowY: 'auto', width: '80%' }}>
             <div style={{ display: 'inline-block', overflowY: 'auto', width: '33%' }}>
               <DatePicker icon="view_day" hint="Choose a date" label="Date" name="Date" value={this.state.date} onChange={this.handleChange.bind(this, 'date')} />
             </div>
@@ -86,6 +88,7 @@ class Ticket extends Component {
                 hint="Choose project"
                 direction="down"
                 selectedPosition="above"
+                disabled={this.state.type !== 'project'}
                 label="Choose project"
                 multiple={false}
                 source={customerSource}
@@ -98,12 +101,23 @@ class Ticket extends Component {
                 name="Reference"
                 hint="Choose reference"
                 direction="down"
+                disabled={this.state.type !== 'task'}
                 selectedPosition="above"
                 label="Choose reference"
                 multiple={false}
                 source={customerSource}
               />
             </div>
+            <Input
+              type="text"
+              icon="description"
+              multiline
+              label="Description"
+              maxLength={400}
+              hint="Description"
+              value={this.state.description}
+              onChange={this.handleChange.bind(this, 'description')}
+            />
           </div>
         </div>
       </section>
