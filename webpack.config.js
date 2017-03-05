@@ -55,7 +55,7 @@ ExtractTextPlugin.extract({
         localIdentName: cssIdentifier,
       },
     },
-    'postcss-loader', // has separate config nearby
+    'postcss-loader',
   ],
 })
   :
@@ -82,7 +82,19 @@ module.exports = {
       exclude: '/node_modules/',
     }, {
       test: /\.(css)$/,
-      loaders: cssLoader,
+      use: [
+        'style-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            sourceMap: true,
+            importLoaders: 1,
+            localIdentName: cssIdentifier,
+          },
+        },
+        'postcss-loader',
+      ],
     }],
   },
   output: {
