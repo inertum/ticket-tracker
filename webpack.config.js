@@ -28,7 +28,7 @@ const plugins = PRODUCTION ?
       warnings: false,
     },
   }),
-  new ExtractTextPlugin('styles/styles-[contenthash:10].css'),
+  new ExtractTextPlugin({ filename: 'styles/[name]-[contenthash:10].css', allChunks: true }),
   new HTMLWebpackPlugin({
     template: 'index-template.html',
   }),
@@ -38,12 +38,34 @@ const plugins = PRODUCTION ?
   }),
 ]
   :
-[new webpack.HotModuleReplacementPlugin()];
+[
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NamedModulesPlugin(),
+];
 
 const cssIdentifier = PRODUCTION ? '[hash:base64:10]' : '[path][name]---[local]';
 
 const cssLoader = PRODUCTION ?
-ExtractTextPlugin.extract({
+{
+  test: /\.(css)$/,
+  use: ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    use: [{
+      loader: 'css-loader',
+      options: {
+        modules: true,
+        sourceMap: true,
+        importLoaders: 1,
+        localIdentName: cssIdentifier,
+      },
+    },
+      'postcss-loader', // has separate config nearby
+    ],
+  }),
+}
+  :
+{
+  test: /\.(css)$/,
   use: [
     {
       loader: 'css-loader',
@@ -54,15 +76,9 @@ ExtractTextPlugin.extract({
         localIdentName: cssIdentifier,
       },
     },
-    'postcss-loader', // has separate config nearby
+    'postcss-loader',
   ],
-})
-  :
-[
-  'style-loader',
-  `css-loader?importLoaders=1&localIdentName=${cssIdentifier}`,
-  'postcss-loader',
-];
+};
 
 
 module.exports = {
@@ -80,10 +96,9 @@ module.exports = {
       test: /\.(png|jpg|gif)$/,
       loaders: ['url-loader?limit=10000&name=images/[hash:12].[ext]'],
       exclude: '/node_modules/',
-    }, {
-      test: /\.(css)$/,
-      loaders: cssLoader,
-    }],
+    },
+      cssLoader,
+    ],
   },
   output: {
     crossOriginLoading: 'anonymous',
