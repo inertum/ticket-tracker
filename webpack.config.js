@@ -44,13 +44,26 @@ const cssIdentifier = PRODUCTION ? '[hash:base64:10]' : '[path][name]---[local]'
 
 const cssLoader = PRODUCTION ?
 ExtractTextPlugin.extract({
-  use: `css-loader?importLoaders=1&localIdentName=${cssIdentifier}!postcss-loader`,
+  use: [
+    'style-loader',
+    {
+      loader: 'css-loader',
+      options: {
+        modules: true,
+        sourceMap: true,
+        importLoaders: 1,
+        localIdentName: cssIdentifier,
+      },
+    },
+    'postcss-loader', // has separate config nearby
+  ],
 })
   :
 [
   'style-loader',
-  `css-loader?importLoaders=1&localIdentName=${cssIdentifier}!postcss-loader`,
+  `css-loader?importLoaders=1&localIdentName=${cssIdentifier}!sass-loader`,
 ];
+
 
 module.exports = {
   entry: {
@@ -68,9 +81,8 @@ module.exports = {
       loaders: ['url-loader?limit=10000&name=images/[hash:12].[ext]'],
       exclude: '/node_modules/',
     }, {
-      test: /\.(scss|css)$/,
+      test: /\.(css)$/,
       loaders: cssLoader,
-      exclude: '/node_modules/',
     }],
   },
   output: {

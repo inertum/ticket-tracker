@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import AppState from './stores/AppState';
 
-require('./styles/main.scss');
+// require('./styles/main.scss');
 
 const appState = new AppState();
 
