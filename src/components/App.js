@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider, observer } from 'mobx-react';
 
-import { Card, Layout, NavDrawer, Panel, Sidebar, AppBar, IconButton } from 'react-toolbox';
+import { Card, Layout, Sidebar, IconButton } from 'react-toolbox';
 
 import Ticket from './Ticket';
 
@@ -50,17 +50,7 @@ export default class App extends Component {
         <Provider store={this.props.store}>
           <div style={{ width: '1180px', margin: '10px auto 0' }}>
             <Layout>
-              <NavDrawer
-                active={this.state.drawerActive}
-                pinned={this.state.drawerPinned} permanentAt="xxxl"
-                onOverlayClick={this.toggleDrawerActive}
-              >
-                <p>
-                      Navigation, account switcher, etc. go here.
-                  </p>
-              </NavDrawer>
-              <Card style={{maxWidth: '980px'}}>
-                <AppBar leftIcon="menu" onLeftIconClick={this.toggleDrawerActive} />
+              <Card style={{ maxWidth: '100%' }}>
                 <Ticket />
               </Card>
               <Sidebar pinned={this.state.sidebarPinned} width={5}>
