@@ -48,7 +48,7 @@ export default class App extends Component {
     return (
       <Router>
         <Provider store={this.props.store}>
-          <div style={{ width: '1180px', margin: '10px auto 0' }}>
+          <div style={{ maxWidth: '1180px', margin: '10px auto 0' }}>
             <Layout>
               <Button label="+ New ticket" flat primary />
               <Card style={{ maxWidth: '100%' }}>

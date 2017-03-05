@@ -43,7 +43,11 @@ class Ticket extends Component {
       <section>
         <AppBar title="ADD A NEW TICKET" />
         <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
+          <p>Enter information below</p>
           <Autocomplete
+            title="Customer"
+            name="Customer"
+            hint="Choose customer"
             direction="down"
             selectedPosition="above"
             label="Choose customer"
@@ -52,9 +56,15 @@ class Ticket extends Component {
             source={customerSource}
             value={this.state.customer}
           />
-          <DatePicker hint="Choose a date" label="Date" name="Date" value={this.state.date} onChange={this.handleChange.bind(this, 'date')} />
-          <TimePicker hint="Choose start time" label="Start Time" name="startTime" value={this.state.startTime} onChange={this.handleChange.bind(this, 'startTime')} />
-          <TimePicker hint="Choose end time" label="End Time" name="endTime" value={this.state.endTime} onChange={this.handleChange.bind(this, 'endTime')} />
+          <div style={{ display: 'inline-block', overflowY: 'auto', width: '33%' }}>
+            <DatePicker icon="view_day" hint="Choose a date" label="Date" name="Date" value={this.state.date} onChange={this.handleChange.bind(this, 'date')} />
+          </div>
+          <div style={{ display: 'inline-block', overflowY: 'auto', width: '33%' }}>
+            <TimePicker icon="schedule" hint="Choose start time" label="Start Time" name="startTime" value={this.state.startTime} onChange={this.handleChange.bind(this, 'startTime')} size="6" />
+          </div>
+          <div style={{ display: 'inline-block', overflowY: 'auto', width: '33%' }}>
+            <TimePicker icon="schedule" hint="Choose end time" label="End Time" name="endTime" value={this.state.endTime} onChange={this.handleChange.bind(this, 'endTime')} />
+          </div>
         </div>
       </section>
     );
