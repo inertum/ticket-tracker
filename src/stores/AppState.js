@@ -11,7 +11,6 @@ class AppState {
 
   @action authenticate() {
     return new Promise((resolve, reject) => {
-      console.log(reject);
       this.authenticating = true;
       setTimeout(() => {
         this.authenticated = !this.authenticated;

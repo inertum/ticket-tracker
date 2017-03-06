@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppBar, Autocomplete, DatePicker, Input, TimePicker, RadioGroup, RadioButton } from 'react-toolbox';
+import { AppBar, Autocomplete, Button, CardActions, DatePicker, Input, TimePicker, RadioGroup, RadioButton } from 'react-toolbox';
 
 import { observer } from 'mobx-react';
 
@@ -41,6 +41,8 @@ class Ticket extends Component {
       endTime: time,
       type: '',
       description: '',
+      project: '',
+      task: '',
     };
   }
 
@@ -55,6 +57,10 @@ class Ticket extends Component {
   handleTypeChange = (value) => {
     this.setState({ type: value });
   };
+
+  handleSubmit = () => {
+    console.log(this.state);
+  }
 
   render() {
     return (
@@ -103,6 +109,8 @@ class Ticket extends Component {
                 label="Choose project"
                 multiple={false}
                 source={projectSource}
+                value={this.state.project}
+                onChange={this.handleChange.bind(this, 'project')}
               />
             </div>
             <div style={{ display: 'inline-block', overflowY: 'auto', width: '50%' }}>
@@ -116,6 +124,8 @@ class Ticket extends Component {
                 label="Choose reference"
                 multiple={false}
                 source={taskSource}
+                value={this.state.task}
+                onChange={this.handleChange.bind(this, 'task')}
               />
             </div>
             <Input
@@ -130,6 +140,9 @@ class Ticket extends Component {
             />
           </div>
         </div>
+        <CardActions>
+          <Button label="Submit new ticket" onClick={this.handleSubmit} />
+        </CardActions>
       </section>
     );
   }

@@ -9,18 +9,16 @@ import Ticket from './Ticket';
 @observer
 export default class App extends Component {
   static propTypes = {
-    store: PropTypes.object,
+    store: PropTypes.shape({
+      authenticated: PropTypes.boolean,
+      authenticating: PropTypes.boolean,
+      authenticate: PropTypes.function,
+    }),
   }
 
   static defaultProps = {
     authenticate: {},
     store: {},
-  };
-
-  state = {
-    drawerActive: false,
-    drawerPinned: false,
-    sidebarPinned: false,
   };
 
   componentDidMount() {
@@ -32,18 +30,6 @@ export default class App extends Component {
     this.props.store.authenticate();
   }
 
-  toggleDrawerActive = () => {
-    this.setState({ drawerActive: !this.state.drawerActive });
-  };
-
-  toggleDrawerPinned = () => {
-    this.setState({ drawerPinned: !this.state.drawerPinned });
-  }
-
-  toggleSidebar = () => {
-    this.setState({ sidebarPinned: !this.state.sidebarPinned });
-  };
-
   render() {
     return (
       <Router>
@@ -54,12 +40,6 @@ export default class App extends Component {
               <Card style={{ maxWidth: '100%' }}>
                 <Ticket />
               </Card>
-              <Sidebar pinned={this.state.sidebarPinned} width={5}>
-                <div><IconButton icon="close" onClick={this.toggleSidebar} /></div>
-                <div style={{ flex: 1 }}>
-                  <p>Supplemental content goes here.</p>
-                </div>
-              </Sidebar>
             </Layout>
           </div>
         </Provider>
